@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - UTC Catholic</title>
+	@Styles.Render( "~/Content/css" )
+	@Scripts.Render( "~/bundles/jquery" )
+
+</head>
+<body class="metro">
+	<nav class="navigation-bar fixed-top">
+		<nav class="navigation-bar-content container">
+			<a class="element">UTC CATHOLIC</a>
+			<div class="element-divider"></div>
+			<div class="element">@Html.ActionLink( "Home", "Index", "Home", null, new { @class="fg-white" } )</div>
+			<div class="element">@Html.ActionLink( "About", "About", "Home", null, new { @class="fg-white" } )</div>
+			<div class="element">@Html.ActionLink( "Contact", "Contact", "Home", null, new { @class="fg-white" } )</div>
+			@if ( Request.IsAuthenticated )
+			{
+				using ( Html.BeginForm( "LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class="place-right" } ) )
+				{
+					@Html.AntiForgeryToken()
+					<div class="element place-right">
+						@Html.ActionLink( "Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" } )
+					</div>
+					<div class="element-divider place-right"></div>
+					<div class="element place-right">
+						<a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+					</div>
+				}
+			}
+			else
+			{
+				<div class="element place-right">@Html.ActionLink( "Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class="fg-white" } )</div>
+					<div class="element-divider place-right"></div>
+				<div class="element place-right">@Html.ActionLink( "Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class="fg-white" } )</div>
+			}
+		</nav>
+	</nav>
+	<div class="container">
+		@RenderBody()
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+		</footer>
+	</div>
+
+	@Scripts.Render( "~/bundles/jquery" )
+	@Scripts.Render( "~/bundles/bootstrap" )
+	@RenderSection( "scripts", required: false )
+</body>
+</html>
