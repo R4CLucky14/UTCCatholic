@@ -1,0 +1,46 @@
+﻿@model UTCCatholic.ViewModels.FamilyView
+@{
+	ViewBag.Title = "Create Family - Admin - ChattAwakening";
+}
+
+<div class="grid">
+	<h1 class="fg-emerald">
+		<a href="@Url.Action("Index")">
+			<i class="icon-arrow-left-3 fg-green smaller"></i>
+		</a>
+		Create
+		<small class="on-right">Family</small>
+	</h1>
+
+	@using(Html.BeginForm("FamilyCreate", "Admin"))
+	{
+		@Html.ValidationSummary()
+		@Html.AntiForgeryToken()
+
+		<div class="input-control text" data-role="input-control">
+			<label>@Html.LabelFor( m => m.Name )</label>
+			@Html.TextBoxFor( m => m.Name, new { placeholder = "Family Name" } )
+			<button class="btn-clear" tabindex="-1" type="button"></button>
+			@Html.ValidationMessageFor( m => m.Name )
+		</div>
+		<div class="input-control select" data-role="input-control">
+			<label>@Html.LabelFor( m => m.Father )</label>
+			@Html.DropDownListFor( m => m.Father.RID, ViewBag.Parents as SelectList )
+			@Html.ValidationMessageFor( m => m.Father )
+		</div>
+		
+		<div class="input-control select" data-role="input-control">
+			<label>@Html.LabelFor( m => m.Mother )</label>
+			@Html.DropDownListFor( m => m.Mother.RID, ViewBag.Parents as SelectList )
+			@Html.ValidationMessageFor( m => m.Mother )
+		</div>
+		
+		<div class="input-control select" data-role="input-control">
+			<label>@Html.LabelFor( m => m.Gopher )</label>
+			@Html.DropDownListFor( m => m.Gopher.RID, ViewBag.Gophers as SelectList )
+			@Html.ValidationMessageFor( m => m.Gopher )
+		</div>
+
+		<input class="button" type="submit" />
+	}
+</div>

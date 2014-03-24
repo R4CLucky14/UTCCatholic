@@ -1,0 +1,24 @@
+﻿@model UTCCatholic.InputModels.MedicalInput
+
+<fieldset>
+	<div class="grid fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.Allergies )</label>
+					@Html.TextBoxFor( m => m.Allergies, new { placeholder = "Any Allergies" } )
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+					@Html.ValidationMessageFor( m => m.Allergies )
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.HealthConditions )</label>
+					@Html.TextBoxFor( m => m.HealthConditions, new { placeholder = "Any Health Conditions" } )
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+					@Html.ValidationMessageFor( m => m.HealthConditions )
+				</div>
+			</div>
+		</div>
+	</div>
+</fieldset>

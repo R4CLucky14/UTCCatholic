@@ -1,0 +1,23 @@
+﻿@model UTCCatholic.InputModels.SchoolInput
+
+<fieldset>
+	<div class="grid fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.College)</label>
+					@Html.TextBoxFor( m => m.College, new { placeholder = "School Name" } )
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+					@Html.ValidationMessageFor( m => m.College )
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="input-control select" data-role="input-control">
+					<label>@Html.LabelFor( m => m.Grade)</label>
+					@Html.DropDownListFor( m => m.Grade, ViewBag.Grades as SelectList, "Select Grade" , new { placeholder = "Last Name" } )
+					@Html.ValidationMessageFor( m => m.Grade )
+				</div>
+			</div>
+		</div>
+	</div>
+</fieldset>

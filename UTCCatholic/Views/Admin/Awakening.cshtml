@@ -1,0 +1,573 @@
+﻿@model UTCCatholic.ViewModels.UserView
+
+@{
+    ViewBag.Title = "Awakening";
+	Html.RenderPartial("_ReviewApplication");
+}
+
+<div class="grid">
+	<div class="row">
+		<div class="col-md-8">
+			<h1 class="fg-green">
+				<a href="@Url.Action("Index", "Admin")">
+					<i class="icon-arrow-left-3 fg-emerald smaller"></i>
+				</a>
+				@ViewBag.Title
+				<small class="on-right">Admin</small>
+			</h1>
+		</div>
+		<div class="col-md-4">
+			@*<a class="col-xs-12 bg-green" id="SendEmail">
+				<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r"><i class="icon-mail on-left"></i>Send Email</span>
+			</a>*@
+		</div>
+	</div>
+	<div data-bind="if: Page.Email.AnyMessages">
+		<div class="row">
+			<h3>Email Alerts:</h3>
+			<ul data-bind="foreach: Page.Email.Messages">
+				<li data-bind="text: m"></li>
+			</ul>
+		</div>
+	</div>
+	<!-- ko if: Page.Users.ShowQuickView() -->
+	<div class="row">
+		<div class="col-sm-6">
+			<h2>Quick View Info</h2>
+		</div>
+		<div class="col-sm-6">
+			<p>Expected Fees: $@ViewBag.ExpectedFees <br />
+			Paid Fees: $@ViewBag.PaidFees</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4">
+			<h3>T-Shirts</h3>
+			<table class="table">
+				<thead>
+					<tr><td>Size</td><td>Amount</td></tr>
+				</thead>
+				<tbody>
+					<tr><td>S</td>		<td data-bind="text: Page.Users.TShirtSizes.S"></td></tr>
+					<tr><td>M</td>		<td data-bind="text: Page.Users.TShirtSizes.M"></td></tr>
+					<tr><td>L</td>		<td data-bind="text: Page.Users.TShirtSizes.L"></td></tr>
+					<tr><td>XL</td>		<td data-bind="text: Page.Users.TShirtSizes.XL"></td></tr>
+					<tr><td>2XL</td>	<td data-bind="text: Page.Users.TShirtSizes.XL2"></td></tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-sm-4">
+			<h3>Transportation</h3>
+			<table class="table">
+				<thead>
+					<tr><td>Value</td><td>Amount</td></tr>
+				</thead>
+				<tbody>
+					<tr><td>True / Yes</td>		<td data-bind="text: Page.Users.Transport.True"></td></tr>
+					<tr><td>False / No</td>		<td data-bind="text: Page.Users.Transport.False"></td></tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-sm-4">
+			<h3>Health Conditions / Allergies</h3>
+			<table class="table">
+				<thead>
+					<tr><td>Value</td><td>Amount</td></tr>
+				</thead>
+				<tbody>
+					<tr><td>Allergies</td>		<td data-bind="text: Page.Users.HealthConditions.Allergies"></td></tr>
+					<tr><td>Health Con.</td>		<td data-bind="text: Page.Users.HealthConditions.Con"></td></tr>
+					<tr><td>Both</td>		<td data-bind="text: Page.Users.HealthConditions.Both"></td></tr>
+					<tr><td>Neither</td>		<td data-bind="text: Page.Users.HealthConditions.Neither"></td></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!--/ko -->
+	<div class="row">
+		<h2>Quick Settings</h2>
+		<div class="row">
+			<div class="input-control switch col-sm-4 col-xs-6 pull-right" data-role="input-control">
+				<label class="pull-right">
+					Show Quick View Info
+					<input type="checkbox" data-bind="checked: Page.Users.ShowQuickView" />
+					<span class="check"></span>
+				</label>
+			</div>
+			<div class="input-control switch col-sm-4 col-xs-6 pull-right" data-role="input-control">
+				<label class="pull-right">
+					Show Email Dialog
+					<input type="checkbox" data-bind="checked: Page.Users.ShowEmailDialog" />
+					<span class="check"></span>
+				</label>
+			</div>
+			<div class="input-control switch col-sm-4 col-xs-6" data-role="input-control">
+				<label class="pull-right">
+					Show Role Dialog
+					<input type="checkbox" data-bind="checked: Page.Users.ShowRoleDialog" />
+					<span class="check"></span>
+				</label>
+			</div>
+			<div class="input-control switch col-sm-4 col-xs-6 pull-right" data-role="input-control">
+				<label class="pull-right">
+					Show Incoming Staffers
+					<input type="checkbox" data-bind="checked: Page.Users.ShowIncomingStaffers" />
+					<span class="check"></span>
+				</label>
+			</div>
+			<div class="input-control switch col-sm-4 col-xs-6 pull-right" data-role="input-control">
+				<label class="pull-right">
+					Show Retreaters
+					<input type="checkbox" data-bind="checked: Page.Users.ShowRetreaters" />
+					<span class="check"></span>
+				</label>
+			</div>
+			<div class="input-control switch col-sm-4 col-xs-6 pull-right" data-role="input-control">
+				<label class="pull-right">
+					Show Staffers
+					<input type="checkbox" data-bind="checked: Page.Users.ShowStaffers" />
+					<span class="check"></span>
+				</label>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div data-bind="if:Page.Users.currentUserNotEmpty()">
+			<div class="col-md-5 col-sm-4 hidden-xs">
+				<!-- ko if: Page.Users.ShowIncomingStaffers() -->
+				<div class="row">
+					<div class="col-xs-9">
+						<h2 data-bind="text: 'Incoming Staffer: ' + Users.StaffersPending().length"></h2>
+					</div>
+					<div class="col-xs-3 padding10">
+						<a class="col-xs-12 button default" data-bind="attr: { href: Page.Users.StaffersPendingEmails }">
+							<span class="text-center fg-white"><i class="icon-mail on-left"></i>Email</span>
+						</a>
+					</div>
+				</div>
+				<table class="table hovered">
+					<thead>
+						<tr><th>@Html.LabelFor( c => c.Personal.FirstName )</th><th>@Html.LabelFor( c => c.Personal.LastName )</th></tr>
+					</thead>
+					<tbody data-bind="foreach: Page.Users.StaffersPending">
+						<tr data-bind="click: Page.Users.setCurrentUser">
+							<td data-bind="text: Personal.FirstName"></td>
+							<td data-bind="text: Personal.LastName"></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- /ko -->
+				<!-- ko if: Page.Users.ShowRetreaters() -->
+				<div class="row">
+					<div class="col-xs-9">
+						<h2 data-bind="text: 'Incoming Retreater: ' + Users.RetreatersPending().length"></h2>
+					</div>
+					<div class="col-xs-3 padding10">
+						<a class="col-xs-12 button default" data-bind="attr: { href: Page.Users.RetreatersPendingEmails }">
+							<span class="text-center fg-white"><i class="icon-mail on-left"></i>Email</span>
+						</a>
+					</div>
+				</div>
+				<table class="table hovered">
+					<thead>
+						<tr><th>@Html.LabelFor( c => c.Personal.FirstName )</th><th>@Html.LabelFor( c => c.Personal.LastName )</th></tr>
+					</thead>
+					<tbody data-bind="foreach: Page.Users.RetreatersPending">
+						<tr data-bind="click: Page.Users.setCurrentUser">
+							<td data-bind="text: Personal.FirstName"></td>
+							<td data-bind="text: Personal.LastName"></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- /ko -->
+				<!-- ko if: Page.Users.ShowStaffers() -->
+				<div class="row">
+					<div class="col-xs-9">
+						<h2 data-bind="text: 'Confirmed Staffer: ' + Users.Staffers().length"></h2>
+					</div>
+					<div class="col-xs-3 padding10">
+						<a class="col-xs-12 button default" data-bind="attr: { href: Page.Users.StaffersEmails }">
+							<span class="text-center fg-white"><i class="icon-mail on-left"></i>Email</span>
+						</a>
+					</div>
+				</div>
+				<table class="table hovered">
+					<thead>
+						<tr><th>@Html.LabelFor( c => c.Personal.FirstName )</th><th>@Html.LabelFor( c => c.Personal.LastName )</th></tr>
+					</thead>
+					<!-- ko foreach: { data: Page.Roles.list, as: 'role' } -->
+					<tbody>
+						<tr>
+							<td>
+								<h3 data-bind="text: Name"></h3>
+							</td>
+							<td>
+								<a class="col-xs-12 button info" data-bind="attr: { href: Emails }">
+									<i class="icon-mail on-left fg-white"></i><span class="text-center fg-white" data-bind="text: 'Email ' + Name()"></span>
+								</a>
+							</td>
+						</tr>
+						<!-- ko foreach: Page.Users.Staffers -->
+						<!-- ko if: IsInRole(role) -->
+						<tr data-bind="click: Page.Users.setCurrentUser">
+							<td data-bind="text: Personal.FirstName"></td>
+							<td data-bind="text: Personal.LastName"></td>
+						</tr>
+						<!-- /ko -->
+						<!-- /ko -->
+					</tbody>
+					<!-- /ko -->
+				</table>
+				<!-- /ko -->
+			</div>
+		</div>
+		<div data-bind="ifnot:Page.Users.currentUserNotEmpty()">
+			<div>
+				<!-- ko if: Page.Users.ShowIncomingStaffers() -->
+				<div class="row">
+					<div class="col-xs-9">
+						<h2 data-bind="text: 'Incoming Staffer Applications: ' + Users.StaffersPending().length"></h2>
+					</div>
+					<div class="col-xs-3 padding10">
+						<a class="col-xs-12 button default" data-bind="attr: { href: Page.Users.StaffersPendingEmails }">
+							<span class="text-center fg-white"><i class="icon-mail on-left"></i>Email Incoming Staffers</span>
+						</a>
+					</div>
+				</div>
+				<table class="table hovered">
+					<thead>
+						<tr>
+							<th class="">@Html.LabelFor( c => c.Personal.FirstName )</th>
+							<th class="">@Html.LabelFor( c => c.Personal.LastName )</th>
+							<th class="hidden-sm hidden-xs">@Html.LabelFor( c => c.Personal.Email )</th>
+							<th class="hidden-xs">@Html.LabelFor( c => c.Personal.TShirtSize )</th>
+							<th class="hidden-sm hidden-xs">@Html.LabelFor( c => c.School.College )</th>
+							<th class="hidden-sm hidden-xs">@Html.LabelFor( c => c.School.Grade )</th>
+							<th class="hidden-xs">Transport-Self</th>
+						</tr>
+					</thead>
+					<tbody data-bind="foreach: Page.Users.StaffersPending">
+						<tr data-bind="click: Page.Users.setCurrentUser">
+							<td class="" data-bind="text: Personal.FirstName"></td>
+							<td class="" data-bind="text: Personal.LastName"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: Personal.Email"></td>
+							<td class="hidden-xs" data-bind="text: Personal.TShirtSize.Size"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: School.College"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: School.Grade.Title"></td>
+							<td class="hidden-xs" data-bind="text: Transportation.TransportSelf"></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- /ko -->
+				<!-- ko if: Page.Users.ShowRetreaters() -->
+				<div class="row">
+					<div class="col-xs-9">
+						<h2 data-bind="text: 'Incoming Retreater Applications: ' + Users.RetreatersPending().length"></h2>
+					</div>
+					<div class="col-xs-3 padding10">
+						<a class="col-xs-12 button default" data-bind="attr: { href: Page.Users.RetreatersPendingEmails }">
+							<span class="text-center fg-white"><i class="icon-mail on-left"></i>Email Retreaters</span>
+						</a>
+					</div>
+				</div>
+				<table class="table hovered">
+					<thead>
+						<tr>
+							<th class="">@Html.LabelFor( c => c.Personal.FirstName )</th>
+							<th class="">@Html.LabelFor( c => c.Personal.LastName )</th>
+							<th class="hidden-sm hidden-xs">@Html.LabelFor( c => c.Personal.Email )</th>
+							<th class="hidden-xs">@Html.LabelFor( c => c.Personal.TShirtSize )</th>
+							<th class="hidden-sm hidden-xs">@Html.LabelFor( c => c.School.College )</th>
+							<th class="hidden-sm hidden-xs">@Html.LabelFor( c => c.School.Grade )</th>
+							<th class="hidden-xs">Transport-Self</th>
+						</tr>
+					</thead>
+					<tbody data-bind="foreach: Page.Users.RetreatersPending">
+						<tr data-bind="click: Page.Users.setCurrentUser">
+							<td class="" data-bind="text: Personal.FirstName"></td>
+							<td class="" data-bind="text: Personal.LastName"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: Personal.Email"></td>
+							<td class="hidden-xs" data-bind="text: Personal.TShirtSize.Size"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: School.College"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: School.Grade.Title"></td>
+							<td class="hidden-xs" data-bind="text: Transportation.TransportSelf"></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- /ko -->
+				<!-- ko if: Page.Users.ShowStaffers() -->
+				<div class="row">
+					<div class="col-xs-9">
+						<h2 data-bind="text: 'Confirmed Staffer Applications: ' + Users.Staffers().length"></h2>
+					</div>
+					<div class="col-xs-3 padding10">
+						<a class="col-xs-12 button default" data-bind="attr: { href: Page.Users.StaffersEmails }">
+							<span class="text-center fg-white"><i class="icon-mail on-left"></i>Email Staffers</span>
+						</a>
+					</div>
+				</div>
+				<table class="table hovered">
+					<thead>
+						<tr>
+							<th class="">@Html.LabelFor( c => c.Personal.FirstName )</th>
+							<th class="">@Html.LabelFor( c => c.Personal.LastName )</th>
+							<th class="hidden-sm hidden-xs">@Html.LabelFor( c => c.Personal.Email )</th>
+							<th class="hidden-xs">@Html.LabelFor( c => c.Personal.TShirtSize )</th>
+							<th class="hidden-sm hidden-xs">@Html.LabelFor( c => c.School.College )</th>
+							<th class="hidden-sm hidden-xs">@Html.LabelFor( c => c.School.Grade )</th>
+							<th class="hidden-xs">Transport-Self</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="visible-md visible-lg" colspan="7">
+								<h3>Unassigned</h3>
+							</td>
+						</tr>
+						<tr>
+							<td class="visible-sm" colspan="4">
+								<h3>Unassigned</h3>
+							</td>
+						</tr>
+						<tr>
+							<td class="visible-xs" colspan="2">
+								<h3>Unassigned</h3>
+							</td>
+						</tr>
+						<!-- ko foreach: Page.Users.Staffers -->
+						<!-- ko ifnot: IsInAnyRole() -->
+						<tr data-bind="click: Page.Users.setCurrentUser">
+							<td class="" data-bind="text: Personal.FirstName"></td>
+							<td class="" data-bind="text: Personal.LastName"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: Personal.Email"></td>
+							<td class="hidden-xs" data-bind="text: Personal.TShirtSize.Size"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: School.College"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: School.Grade.Title"></td>
+							<td class="hidden-xs" data-bind="text: Transportation.TransportSelf"></td>
+						</tr>
+						<!-- /ko -->
+						<!-- /ko -->
+					</tbody>
+					<!-- ko foreach: { data: Page.Roles.list, as: 'role' } -->
+					<tbody>
+						<tr>
+							<td class="visible-md visible-lg" colspan="5">
+								<h3 data-bind="text: Name"></h3>
+							</td>
+							<td class="visible-md visible-lg" colspan="2">
+								<a class="col-xs-12 button info" data-bind="attr: { href: Emails }">
+									<i class="icon-mail on-left fg-white"></i><span class="text-center fg-white" data-bind="text: 'Email ' + Name()"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="visible-sm" colspan="2">
+								<h3 data-bind="text: Name"></h3>
+							</td>
+							<td class="visible-sm" colspan="2">
+								<a class="col-xs-12 button info" data-bind="attr: { href: Emails }">
+									<i class="icon-mail on-left fg-white"></i><span class="text-center fg-white" data-bind="text: 'Email ' + Name()">Email</span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="visible-xs" colspan="1">
+								<h3 data-bind="text: Name"></h3>
+							</td>
+							<td class="visible-xs" colspan="1">
+								<a class="col-xs-12 button info" data-bind="attr: { href: Emails }">
+									<i class="icon-mail on-left fg-white"></i><span class="text-center fg-white" data-bind="text: 'Email ' + Name()"></span>
+								</a>
+							</td>
+						</tr>
+						<!-- ko foreach: Page.Users.Staffers -->
+						<!-- ko if: IsInRole(role) -->
+						<tr data-bind="click: Page.Users.setCurrentUser">
+							<td class="" data-bind="text: Personal.FirstName"></td>
+							<td class="" data-bind="text: Personal.LastName"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: Personal.Email"></td>
+							<td class="hidden-xs" data-bind="text: Personal.TShirtSize.Size"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: School.College"></td>
+							<td class="hidden-sm hidden-xs" data-bind="text: School.Grade.Title"></td>
+							<td class="hidden-xs" data-bind="text: Transportation.TransportSelf"></td>
+						</tr>
+						<!-- /ko -->
+						<!-- /ko -->
+					</tbody>
+					<!-- /ko -->
+				</table>
+				<!-- /ko -->
+			</div>
+		</div>
+		<div data-bind="if: Page.Users.currentUserNotEmpty()">
+			<div class="col-md-7 col-sm-8 col-xs-12">
+				<div class="row">
+					<div class="col-md-6">
+						<h2 data-bind="text: Page.Users.currentUser().Personal.FirstName() + ' ' + Page.Users.currentUser().Personal.LastName()"></h2>
+					</div>
+					<div class="col-md-6">
+						<!--ko if: Page.Users.ShowEmailDialog() || Page.Users.ShowRoleDialog() -->
+						<button type="button" class="col-xs-12 bg-red" id="SendEmail" data-bind="click: Page.Users.setCurrentUserFalse">
+							<span class="col-xs-12 padding5 subheader text-center fg-white"><i class="icon-cancel on-left"></i>DeSelect</span>
+						</button>
+						<!-- /ko -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12" data-bind="if: Page.Users.ShowEmailDialog()">
+						<h3>Email User</h3>
+						<form data-bind="submit: Page.Email.EmailUser">
+							<input type="hidden" id="UserId" name="UserId" data-bind="value: Page.Users.currentUser().RID()" />
+							<div class="input-control text" data-role="input-control">
+								<label>Subject:</label>
+								<input type="text" data-bind="value:Page.Email.Subject()" />
+								<button class="btn-clear" tabindex="-1" type="button"></button>
+							</div>
+							<div class="input-control textarea">
+								<label>Body:</label>
+								<textarea data-bind="value:Page.Email.Body()"></textarea>
+							</div>
+							<div class="row">
+								<span class="col-sm-12">
+									**All Emails are automatically formatted with a Greeting and a Salutation**
+									**All Emails come from awakening@utccatholic.org. If you need to receive responses, please <a href="mailto:james0308@outlook.com">email the webmaster</a> to be put on the forward list.**
+								</span>
+							</div>
+							<button type="submit" class="col-xs-12 bg-green" id="SendEmail">
+								<span class="col-xs-12 padding10 subheader text-center fg-white introduce_r"><i class="icon-mail on-left"></i>Email User</span>
+							</button>
+						</form>
+					</div>
+				</div>
+				<!-- ko if:Page.Users.ShowRoleDialog() -->
+				<div class="row" data-bind="if: Page.Users.currentUser().StafferPending()">
+					<form data-bind="submit: Page.Users.UpdateRole">
+						<p>The user has not been assigned any roles. Please select a role to confirm the staffer. This will not contact the staffer.</p>
+						<p>The user will be moved to Confirmed Staffers, and this dialog will change to allow you to add or remove multiple roles.</p>
+						<p>To make a new role (Parents, Gophers, P-Site, etc.), please go @Html.ActionLink( "here", "Roles", "Admin" ).</p>
+
+						<div class="input-control select" data-role="input-control">
+							<label>Role</label>
+							<select data-bind="options:Page.Roles.list, optionsValue: 'Id', optionsText:'Name', optionsCaption: 'Select Role'"></select>
+						</div>
+						<input hidden data-bind="value: Page.Users.currentUser().RID()"/>
+						<button type="submit" class="col-xs-12 bg-green" id="SendEmail">
+							<span class="col-xs-12 padding10 subheader text-center fg-white introduce_r"><i class="icon-tag on-left"></i>Save Role</span>
+						</button>
+					</form>
+				</div>
+				<div class="row" data-bind="if: Page.Users.currentUser().Staffer()">
+					<form data-bind="submit: Page.Users.AddUserRole">
+						<h3>Current Roles</h3>
+						<ul data-bind="foreach: Page.Users.currentUser().Roles()">
+							<li><span data-bind="text: Name"></span> <i class="icon-cancel-2 fg-red" data-bind="click: Page.Users.RemoveUserRole"></i></li>
+						</ul>
+						<p>To make a new role (Parents, Gophers, P-Site, etc.), please go @Html.ActionLink( "here", "Roles", "Admin" ).</p>
+
+						<div class="input-control select" data-role="input-control">
+							<label>Role</label>
+							<select data-bind="options:Page.Roles.list, optionsValue: 'Id' ,value:Page.Users.currentUser().Role, optionsText:'Name', optionsCaption: 'Select Role'"></select>
+						</div>
+						<button type="submit" class="col-xs-12 bg-green" id="SendEmail">
+							<span class="col-xs-12 padding10 subheader text-center fg-white introduce_r"><i class="icon-tag on-left"></i>Save Role</span>
+						</button>
+					</form>
+				</div>
+				<!-- /ko -->
+				<div data-bind="template: { name: 'viewApplication', data: Page.Users.currentUser() }">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+			<div data-bind="if: Page.Users.loading()">
+				<div data-bind="if: Page.failed()">
+					<span>We could not authenticate you. This is the server message:</span><br />
+					<span data-bind="text: Page.Message()"></span>
+					Please log out, and log back in, and return here. If the problem persists, please <a href="mailto:james0308@outlook.com">contact the administrator.</a>
+				</div>
+				<div data-bind="ifnot: Page.failed()">
+					<img src="@Url.Content("~/Content/Images/ajax-loader.gif")" height=50 width=50 />
+					Please be patient. We are loading the latest information.
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script>
+		var Page = new function ()
+		{
+			self = this;
+			self.Users = new Users();
+			self.Roles = new Roles();
+			self.failed = ko.observable(false);
+			self.Message = ko.observable();
+			self.Email = new Email();
+		}
+		ko.applyBindings(Page);
+		$.connection.hub.start(function ()
+		{
+		}).done(function ()
+		{
+			console.log('Connected to Server!');
+			Page.Users.init();
+			Page.Roles.init();
+			Page.failed(false);
+		})
+		.fail(function ()
+		{
+			console.log('Could not Connect!');
+			Page.failed(true);
+		});
+
+	@*	$("#SendEmail").on('click', function ()
+		{
+			$.Dialog({
+				shadow: true,
+				overlay: false,
+				icon: '<span class="icon-mail"></span>',
+				title: 'Send Email',
+				width: 500,
+				padding: 10,
+				content:	'<div id="emailForm">' +
+								'<form id="emailFormInner">' +
+									'<div class="input-control select" data-role="input-control">' +
+										'<label>To:</label>' +
+										'<select type="text" data-bind="options:Page.Roles.AvailableTo, value:Page.Email.SelectedTo">' +
+										'</select>' +
+									'</div>' +
+									'<div class="input-control text" data-role="input-control">' +
+										'<label>Subject:</label>' +
+										'<input type="text" data-bind="value::Page.Email.Subject" />' +
+										'<button class="btn-clear" tabindex="-1" type="button"></button>' +
+									'</div>' +
+									'<div class="input-control textarea">' +
+										'<label>Body:</label>' +
+										'<textarea data-bind="value:Page.Email.Body"></textarea>' +
+									'</div>' +
+									'<div class="row">' +
+										'<div class="col-xs-2">' +
+											'<button type="submit" data-bind="click: Page.Email.SendEmail" onclick="$.Dialog.close()">Send</button>' +
+										'</div>' +
+									'</div>' +
+									'<div class="row">' +
+										'<span class="col-sm-12">' +
+											'**All Emails are automatically formatted with a Greeting and a Salutation**' +
+										'</span>' +
+									'</div>' +
+							'</form>' +
+						'</div>',
+				draggable: true
+			});
+
+			$(function ()
+			{
+				ko.applyBindings(Page, document.getElementById("emailForm"));
+			});
+		});*@
+	</script>
+
+</div>

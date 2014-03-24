@@ -1,0 +1,26 @@
+﻿
+<script type="text/html" id="roleViewModel">
+	<form data-bind="submit: Page.Roles.editRole">
+		<div class="input-control text" data-role="input-control">
+			<label>Role Name</label>
+			<input data-bind="value: Name()" name="RoleName" id="RoleName" />
+			<button class="btn-clear" tabindex="-1" type="button"></button>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<button type="submit" class="col-xs-12 bg-green">
+					<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r"><i class="icon-loop smaller"></i> Edit Role</span>
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a class="col-xs-12 bg-lightRed" data-bind="click: Page.Roles.deleteRole">
+					<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r"><i class="icon-minus-2 smaller"></i> Delete Role</span>
+				</a>
+			</div>
+		</div>
+	</form>
+</script>

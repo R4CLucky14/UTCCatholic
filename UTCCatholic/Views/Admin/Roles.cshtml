@@ -1,0 +1,113 @@
+﻿@model UTCCatholic.ViewModels.RoleView
+@{
+	ViewBag.Title = "Roles";
+	Html.RenderPartial( "_RoleViewModel" );
+}
+
+<div class="row">
+	<div class="col-md-8">
+		<h1 class="fg-green">
+			<a href="@Url.Action("Index", "Admin")">
+				<i class="icon-arrow-left-3 fg-emerald smaller"></i>
+			</a>
+			@ViewBag.Title
+			<small class="on-right">Admin</small>
+		</h1>
+	</div>
+	<div class="col-md-4">
+		<a class="col-xs-12 bg-emerald" id="AddRole">
+			<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r"><i class="icon-plus-2 smaller"></i> New Role</span>
+		</a>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-3">
+		<h2>Roles: <span data-bind="text: Roles.list().length"></span></h2>
+		<table class="table hovered">
+			<thead>
+				<tr><th>@Html.LabelFor( c => c.Name )</th></tr>
+			</thead>
+			<tbody data-bind="foreach: Page.Roles.list">
+				<tr data-bind="click: Page.Roles.setCurrentRole">
+					<td data-bind="text: Name"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-sm-8 col-md-offset-1" data-bind="template: { name: 'roleViewModel', data: Page.Roles.currentRole, if: Page.Roles.currentRoleNotEmpty() }">
+	</div>
+
+<div>
+	<div data-bind="if: Page.Roles.loading()">
+		<div data-bind="if: Page.failed()">
+			<span>We could not authenticate you. This is the server message:</span><br />
+			<span data-bind="text: Page.Message()"></span>
+			Please log out, and log back in, and return here. If the problem persists, please <a href="mailto:james0308@outlook.com">contact the administrator.</a>
+		</div>
+		<div data-bind="ifnot: Page.failed()">
+			<img src="@Url.Content("~/Content/Images/ajax-loader.gif")" height=50 width=50 />
+			Please be patient. We are loading the latest information.
+		</div>
+	</div>
+</div>
+
+
+<script>
+	var Page = new function ()
+	{
+		self = this;
+		self.Users = new Users();
+		self.Roles = new Roles();
+		self.failed = ko.observable(false);
+		self.Message = ko.observable();
+		self.Email = new Email();
+	}
+	ko.applyBindings(Page);
+	$.connection.hub.start(function ()
+	{
+	}).done(function ()
+	{
+		console.log('Connected to Server!');
+		Page.Roles.init();
+		Page.failed(false);
+	})
+    .fail(function ()
+    {
+    	console.log('Could not Connect!');
+    	Page.failed(true);
+    });
+
+	$("#AddRole").on('click', function ()
+	{
+		$.Dialog({
+			shadow: true,
+			overlay: false,
+			icon: '<span class="icon-plus-2"></span>',
+			title: 'Create Role',
+			width: 500,
+			padding: 10,
+			content: '<div id="roleForm">' +
+							'<form id="roleFormInner">' +
+								'<div class="input-control text" data-role="input-control">' +
+									'<label>Title/Name:</label>' +
+									'<input type="text" data-bind="value:Page.Roles.NewRoleTitle" placeholder="Role Title" />' +
+									'<button class="btn-clear" tabindex="-1" type="button"></button>' +
+								'</div>' +
+								'<div class="row">' +
+									'<div class="col-xs-2">' +
+										'<button type="submit" data-bind="click: Page.Roles.createRole" onclick="$.Dialog.close()">Send</button>' +
+									'</div>' +
+								'</div>' +
+						'</form>' +
+					'</div>',
+			draggable: true
+		});
+
+		$(function ()
+		{
+			ko.applyBindings(Page, document.getElementById("roleForm"));
+		});
+	});
+</script>
+

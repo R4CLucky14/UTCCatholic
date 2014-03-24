@@ -1,0 +1,50 @@
+﻿@model IOrderedEnumerable<UTCCatholic.ViewModels.UserView>
+@{
+	ViewBag.Title = "Fees - Admin - ChattAwakening";
+}
+
+
+<div class="grid">
+	<div class="row">
+		<h1 class="fg-amber col-sm-6">
+			<a href="@Url.Action("Index")">
+				<i class="icon-arrow-left-3 fg-amber smaller"></i>
+			</a>
+			Fees
+			<small class="on-right">Admin</small>
+		</h1>
+	</div>
+
+	@if ( Model.Count() > 0 )
+	{
+		using ( Html.BeginForm( "CheckFees", "Admin", FormMethod.Post ) )
+		{
+			@Html.AntiForgeryToken()
+			<table class="table striped">
+				<tr>
+					<td>First Name</td>
+					<td>Last Name</td>
+					<td>Application Date</td>
+					<td>Fee</td>
+					<td>Paid?</td>
+					<td class="hidden-print">Pay Fee</td>
+				</tr>
+				@foreach(var u in Model)
+				{
+					<tr>
+						<td>@u.Personal.FirstName</td>
+						<td>@u.Personal.LastName</td>
+						<td>@u.ApplicationStamp</td>
+						<td>@u.Fee</td>
+						<td class="input-control checkbox"><label><input type="checkbox" value="@u.IsFeePaid" disabled /><span class="check"></span></label></td>
+						<td class="hidden-print"><button type="submit" class="button" value="@u.RID" name="ChildID">Pay Fee</button></td>
+					</tr>
+				}
+			</table>
+		}
+	}
+	else
+	{
+		<p class="lead">Woops! For some reason, we don't have any data! If this continues, <a href="mailto:james0308@outlook.com">contact the administrator</a>.</p>
+	}
+</div>

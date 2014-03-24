@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Home Page";  
+}
+
+<div class="hero-unit">
+	@*<script>
+		$.getJSON("https://graph.facebook.com/utccatholic/", null, function( data, textStatus, jqXHR )
+		{
+			var json = data;
+		});
+	</script>*@
+
+    <h1>UTC Catholic</h1>
+    <p class="lead">This is the UTC Catholic Website. For the latest events and information, <a href="https://www.facebook.com/UTCCatholic">please like us on facebook.</a></p>
+
+	<div class="grid">
+		<div class="row">
+			<div class="col-sm-5">
+				<h3>Mass Schedule</h3>
+				
+				<div class="padding10">
+					@*
+						<div class="row">
+							<div class="padding5 bg-darkCyan" >
+								<p class="fg-white text-center"><strong>Spring Break:</strong> We won't have Mass this upcoming Sunday (March 9) or Monday (March 12).</p>
+							</div>
+						</div>
+					*@
+					<p>We have Mass, along with Dinner afterwards, every Sunday and Wednesday at 6:30 PM all School Year.</p>
+					<p>Any Special Changes will be listed here, such as a change in Mass schedule or an additional Mass for a Holy Day of Obligation.</p>
+				</div>
+
+			</div>
+			<div class="col-md-offset-2 col-md-5 col-sm-7" >
+				<div class="row no-margin">
+					<a class="col-xs-12 bg-green" href="@Url.Action("Index", "Awakening")">
+						<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Looking for Awakening? <br /> Click Here!</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-3 col-md-4">
+				<blockquote>
+					<p>As for me and my house, we will serve the Lord.</p>
+					<small><cite>Joshua 24:15</cite></small>
+				</blockquote>
+			</div>
+		</div>
+	</div>
+	<div>
+	</div>
+</div>

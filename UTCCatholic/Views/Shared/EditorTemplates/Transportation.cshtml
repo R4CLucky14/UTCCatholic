@@ -1,0 +1,14 @@
+﻿@model UTCCatholic.InputModels.TransportationInput
+
+<fieldset>
+	<div class="input-control checkbox" data-role="input-control">
+		<label>
+			@Html.LabelFor( m => m.TransportSelf )
+			@Html.CheckBoxFor( m => m.TransportSelf )
+			<span class="check"></span>
+			Check if you can transport yourself ( or arrange transportation for yourself ) to and from ChattAwakening.
+		</label>
+		@Html.ValidationMessageFor( m => m.TransportSelf )
+		<p class="text-success">If you are not able to transport yourself, we will make arrangements.</p>
+	</div>
+</fieldset>

@@ -1,0 +1,36 @@
+﻿@model UTCCatholic.InputModels.UserInput
+@{
+	ViewBag.Title = "Profile - ChattAwakening";
+}
+
+
+<h1 class="fg-emerald">
+	<a href="@Url.Action("Index")">
+		<i class="icon-arrow-left-3 fg-green smaller"></i>
+	</a>
+	@Model.Name
+	<small class="on-right">Profile</small>
+</h1>
+		<h3 class="subheader">@Html.LabelFor( c => c.Personal )</h3>
+		@Html.DisplayFor( c => c.Personal, "Personal" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.School )</h3>
+		@Html.DisplayFor( c => c.School, "School" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.Religion )</h3>
+		@Html.DisplayFor( c => c.Religion, "Religion" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.Medical )</h3>
+		@Html.DisplayFor( c => c.Medical, "Medical" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.Emergency )</h3>
+		@Html.DisplayFor( c => c.Emergency, "Emergency" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.Transportation )</h3>
+		@Html.DisplayFor( c => c.Transportation, "Transportation" )
+		<hr />

@@ -1,0 +1,101 @@
+﻿@model ICollection<UTCCatholic.ViewModels.FamilyView>
+@{
+	ViewBag.Title = "Families - Admin - ChattAwakening";
+}
+
+@if ( Model != null )
+{
+	<div class="grid">
+		<div class="row">
+			<h1 class="fg-emerald col-sm-6">
+				<a href="@Url.Action("Index")">
+					<i class="icon-arrow-left-3 fg-green smaller"></i>
+				</a>
+				Families
+				<small class="on-right">Admin</small>
+			</h1>
+
+
+			<a class="col-xs-12 col-sm-6 bg-darkBlue  hidden-print" href="@Url.Action( "FamilyCreate", "Admin" )">
+				<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r"><i class="icon-plus on-left-more"></i>Create New Family <br /></span>
+			</a>
+			
+		</div>
+		@foreach ( var f in Model )
+		{
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>@f.Name</h2>
+				</div>
+				<div class="col-sm-6  hidden-print">
+					<a class="col-xs-12 bg-emerald" href="@Url.Action( "FamilyEdit", "Admin", new { FamilyID = f.RID  } )">
+						<span class="col-xs-12 padding5 subheader text-center fg-white introduce_r"><i class="icon-plus on-left-more"></i>Edit Family <br /></span>
+					</a>
+				</div>
+			</div>
+			<h3>Father</h3>
+			if (f.Father != null)
+			{
+				<a class="col-xs-offset-1" href="mailto:@f.Father.Personal.Email"><span>@f.Father.Personal.FirstName @f.Father.Personal.LastName</span></a>
+			}
+			<h3>Mother</h3>
+			if ( f.Mother != null )
+			{
+				<a class="col-xs-offset-1" href="mailto:@f.Mother.Personal.Email" ><span>@f.Mother.Personal.FirstName @f.Mother.Personal.LastName</span></a>
+			}
+			<h3>Gopher</h3>
+			if ( f.Gopher != null )
+			{
+				<a class="col-xs-offset-1" href="mailto:@f.Gopher.Personal.Email" ><span>@f.Gopher.Personal.FirstName @f.Gopher.Personal.LastName</span></a>
+			}
+			<h3>Children</h3>
+			foreach ( var child in @f.Children )
+			{
+				using ( Html.BeginForm( "RemoveChild", "Admin" ) )
+				{
+					@Html.ValidationSummary()
+					@Html.AntiForgeryToken()
+					@Html.Hidden( "FamilyID", f.RID )
+					@Html.Hidden( "ChildID", child.RID )
+					@*<a class="col-xs-offset-1"  href="@Url.Action("Profile","Awakening", new { Id = @child.RID })">*@<span>@child.Personal.FirstName @child.Personal.LastName<input class="icon-cancel-2 on-right-more" type="submit" /></span>@*</a>*@
+				}
+			}
+			using(Html.BeginForm("AddChild", "Admin", FormMethod.Post))
+			{
+				@Html.AntiForgeryToken()
+				@Html.Hidden( "FamilyID", f.RID )
+				<div class="row hidden-print">
+					<div class="col-xs-6">
+						<div class="input-control select" data-role="input-control">
+							@Html.DropDownList( "ChildID", ViewBag.Retreaters as SelectList )
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<button type="submit" class="button large success">Add Child</button>
+					</div>
+				</div>
+			}
+			<h3>P-Site</h3>
+			foreach ( var psite in @f.PSite )
+			{
+				<a class ="col-xs-offset-1" href="mailto:@psite.Personal.Email"><span>@psite.Personal.FirstName @psite.Personal.LastName</span></a>
+			}
+			<div class="page-break"></div>
+			<hr class="hidden-print" />
+		}
+	</div>
+}
+else
+{
+	<div class="grid">
+		<h1 class="fg-emerald">
+			<a href="@Url.Action("Index")">
+				<i class="icon-arrow-left-3 fg-green smaller"></i>
+			</a>
+			Family
+			<small class="on-right">ChattAwakening</small>
+		</h1>
+
+		<h1>Sorry, you are not yet in a family, according to our records. If you believe this to be a mistake, please <a href="mailto:james0308@outlook.com">email our administrators</a></h1>
+	</div>
+}

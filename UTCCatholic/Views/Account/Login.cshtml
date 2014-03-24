@@ -1,0 +1,34 @@
+@{
+	ViewBag.Title = "Log In";
+}
+<h1 class="fg-emerald">
+	Log In
+	<small class="on-right">UTC Catholic</small>
+</h1>
+<h3 class="subheader-secondary">Log In Using One of the Following Services</h3>
+
+<div class="row">
+	<div class="col-sm-4">
+		<section id="socialLoginForm">
+			<ul style="list-style: none">
+				@{ Html.RenderPartial( "~/Views/Account/_ExternalLoginsListPartial.cshtml" ); }
+			</ul>
+		</section>
+	</div>
+	<div class="col-md-8">
+		<h4 class="subheader">What is this?</h4>
+		<p>
+			You were brought here because we simply need you to log in using one of our providers on the left.
+		</p>
+		<h4 class="subheader">Why am I here?</h4>
+		<p>
+			The page you were accessing needs you to log in, which we try to make as easy as possible.
+		</p>
+		<h4 class="subheader">What do I need?</h4>
+		<p>
+			All you need is an account at either Google, Microsoft, Facebook, or Twitter.
+		</p>
+		@Html.ActionLink( "Cancel Log In", "Index", "Home", null, new { area="", @class="btn btn-danger btn-lg" } )
+
+	</div>
+</div>

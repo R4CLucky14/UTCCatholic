@@ -1,0 +1,41 @@
+﻿@model UTCCatholic.ViewModels.EmergencyView
+
+<div class="grid fluid">
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-control text" data-role="input-control">
+				<label>@Html.LabelFor( m => m.FirstName )</label>
+				<input value="@Model.FirstName" disabled />
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-control text" data-role="input-control">
+				<label>@Html.LabelFor( m => m.LastName )</label>
+				<input value="@Model.LastName" disabled />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<label class="subheader-secondary">Phone</label>
+		<fieldset>
+			<div class="col-xs-6">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.Phone.Number )</label>
+					<input value="@Model.Phone.Number" disabled />
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.Phone.Carrier )</label>
+					<input value="@Model.Phone.Carrier" disabled />
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div class="row">
+		<div class="input-control text col-xs-12" data-role="input-control">
+			<label>@Html.LabelFor( m => m.Email )</label>
+			<input value="@Model.Email" disabled />
+		</div>
+	</div>
+</div>

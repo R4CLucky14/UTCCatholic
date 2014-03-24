@@ -1,0 +1,27 @@
+﻿@{
+	ViewBag.Title = "Retreater Information - ChattAwakening";
+}
+
+<div class="grid">
+	<h1 class="fg-cyan">
+		<a href="@Url.Action("Index")">
+			<i class="icon-arrow-left-3 fg-green smaller"></i>
+		</a>
+		Retreater Information
+		<small class="on-right">ChattAwakening</small>
+	</h1>
+
+	<h2>Where:</h2>	
+	<p>We will be meeting outside, at the front, UTC Catholic Student Center around 5 pm (Time will be updated).</p>
+	<p><strong>Starting after 4:30 pm, </strong> the UTC Parking Lot across from the street is free. Please park there.</p>
+	<p>We will carpool to All Saints from the Catholic Center.</p>
+
+	<h2>Fees:</h2>
+	<p>We will collect fees on the day of the retreat in either cash or check.</p>
+	<p>Make all checks out to the UTC Catholic Student Center.</p>
+	@if ( ViewBag.Fee != null )
+	{
+	<p>If you are unsure of your fee, it is: $@ViewBag.Fee.</p>
+	}
+	<p class="lead">This site will be updated, along with emails sent, with any additional important information as we approach ChattAwakening!</p>
+</div>

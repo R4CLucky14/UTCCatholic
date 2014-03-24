@@ -1,0 +1,38 @@
+﻿@model UTCCatholic.ViewModels.ReligionView
+
+<div class="grid fluid">
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-control text" data-role="input-control">
+				<label>@Html.LabelFor( m => m.FavoriteBibleVerse )</label>
+				<input data-bind="value:Religion.FavoriteBibleVerse()" disabled />
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-control text" data-role="input-control">
+				<label>@Html.LabelFor( m => m.FavoriteSaint )</label>
+				<input data-bind="value:Religion.FavoriteSaint()" disabled />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-control textarea" data-role="input-control">
+				<label>@Html.LabelFor( m => m.Reason )</label>
+				<textarea data-bind="value:Religion.Reason()" disabled></textarea>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-control textarea" data-role="input-control">
+				<label>@Html.LabelFor( m => m.RoleModel )</label>
+				<textarea data-bind="value:Religion.RoleModel()" disabled></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-control textarea col-xs-12" data-role="input-control">
+	<label>@Html.LabelFor( m => m.PrayerRequest )</label>
+			<textarea data-bind="value:Religion.PrayerRequest()" disabled></textarea>
+</div>
+	</div>
+</div>

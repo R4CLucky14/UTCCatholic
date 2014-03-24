@@ -1,0 +1,45 @@
+﻿@model UTCCatholic.InputModels.ReligionInput
+
+<fieldset>
+	<div class="grid fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.FavoriteBibleVerse )</label>
+					@Html.TextBoxFor( m => m.FavoriteBibleVerse, new { placeholder = "Favorite Bible Verse" } )
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+					@Html.ValidationMessageFor( m => m.FavoriteBibleVerse )
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.FavoriteSaint )</label>
+					@Html.TextBoxFor( m => m.FavoriteSaint, new { placeholder = "Favorite Saint" } )
+					<button class="btn-clear" tabindex="-1" type="button"></button>
+					@Html.ValidationMessageFor( m => m.FavoriteSaint )
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-control textarea" data-role="input-control">
+					<label>@Html.LabelFor( m => m.Reason )</label>
+					@Html.TextAreaFor( m => m.Reason, new { placeholder = "I want to attend ChattAwakening because . . . " } )
+					@Html.ValidationMessageFor( m => m.Reason )
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="input-control textarea" data-role="input-control">
+					<label>@Html.LabelFor( m => m.RoleModel )</label>
+					@Html.TextAreaFor( m => m.RoleModel, new { placeholder = "My Role Model is . . . " } )
+					@Html.ValidationMessageFor( m => m.RoleModel )
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="input-control textarea" data-role="input-control">
+		<label>@Html.LabelFor( m => m.PrayerRequest )</label>
+		@Html.TextAreaFor( m => m.PrayerRequest, new { placeholder = "" } )
+		@Html.ValidationMessageFor( m => m.PrayerRequest )
+	</div>
+</fieldset>

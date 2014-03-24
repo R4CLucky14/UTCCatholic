@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - UTC Catholic</title>
+	<script type="text/javascript">
+		(function ()
+		{
+			if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/))
+			{
+				var msViewportStyle = document.createElement("style");
+				msViewportStyle.appendChild(document.createTextNode("@@-ms-viewport{width:auto!important}"));
+				document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+			}
+		})();
+	</script>
+	@Styles.Render( "~/Content/css" )
+	@Scripts.Render( "~/bundles/jquery" )
+	<script src="~/signalr/hubs"></script>
+
+	<script type="text/javascript">
+		$(function ()
+		{
+			//var height = $('.navigation-bar').outerHeight(true);
+			//$('#content').attr('style', "margin-top:" + height + "px;");
+			//$('#wrap').attr('style', "margin-top:-" + height + "px;");
+		});
+	</script>
+	
+	@RenderSection( "scripts", required: false )
+</head>
+<body class="metro">
+	<div id="wrap">
+		<nav class="navigation-bar fixed-top hidden-print">
+			<nav class="navigation-bar-content container">
+				<a class="element" href="@Url.Action("Index", "Home")" >UTC CATHOLIC</a>
+				<div class="element-divider"></div>
+				@Html.ActionLink( "About", "About", "Home", null, new { @class="fg-white element" } )
+				@Html.ActionLink( "Contact", "Contact", "Home", null, new { @class="fg-white element" } )
+				@if ( Request.IsAuthenticated )
+				{
+					if( User.IsInRole("Admin"))
+					{
+						@Html.ActionLink( "Admin", "Index", "Admin", null, new { @class="fg-white element" } )
+					}
+
+					using ( Html.BeginForm( "LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class="place-right" } ) )
+					{
+						@Html.AntiForgeryToken()
+
+						@Html.ActionLink( "Hello " + User.Identity.GetUserName() +"!", "Manage", "Account", null, new { @class="fg-white element place-right" } )
+
+						<button class="fg-white place-right element" type="submit">Log off</button>
+						@*
+						<div class="element place-right">
+							<a class="fg-white" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+						</div>
+						*@
+					}
+				}
+				else
+				{
+					<div class="element place-right">
+						<a href="#" class="dropdown-toggle" href="#">
+							Log In
+						</a>
+						<ul class="dropdown-menu" data-role="dropdown" style="min-width:230px">
+							@{ Html.RenderPartial( "~/Views/Account/_ExternalLoginsListPartial.cshtml" ); }
+						</ul>
+					</div>
+				}
+			</nav>
+		</nav>
+		<div class="container" id="content">
+			@RenderBody()
+
+		</div>
+	</div>
+	<footer class="bg-steel no-margin hidden-print">
+		<div class="grid container">
+			<div>
+				<div class="col-xs-7">
+					<div class="tertiary-text credit">
+						<a class="fg-white" href="mailto:james0308@outlook.com">
+							<span class="hidden-xs">Running into issues? Contact our Administrator!</span>
+							<span class="visible-xs">Running into issues?</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-5">
+					<div class="tertiary-text fg-white credit">&copy; @DateTime.Now.Year - UTC Catholic</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

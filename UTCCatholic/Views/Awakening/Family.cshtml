@@ -1,0 +1,126 @@
+﻿@model UTCCatholic.InputModels.FamilyInput
+@{
+	if(Model != null)
+	{
+		ViewBag.Title = @Model.Name + " - ChattAwakening";
+	}
+	else
+	{
+		ViewBag.Title = "Family - ChattAwakening";
+	}
+}
+
+@if ( Model != null )
+{
+	<div class="grid">
+		<h1 class="fg-cyan">
+			<a href="@Url.Action("Index")">
+				<i class="icon-arrow-left-3 fg-green smaller"></i>
+			</a>
+			@Model.Name
+			<small class="on-right">Family</small>
+		</h1>
+
+		<h3>Father</h3>
+			<a href="mailto:@Model.Father.Personal.Email"><span>@Model.Father.Personal.FirstName @Model.Father.Personal.LastName</span></a>
+		<h3>Mother</h3>
+			<a href="mailto:@Model.Mother.Personal.Email"><span>@Model.Mother.Personal.FirstName @Model.Mother.Personal.LastName</span></a>
+		<h3>Gopher</h3>
+			<a href="mailto:@Model.Gopher.Personal.Email"><span>@Model.Gopher.Personal.FirstName @Model.Gopher.Personal.LastName</span></a>
+		<h3>Children</h3>
+			@foreach ( var child in @Model.Children )
+			{
+				@*<a href="@Url.Action("Profile","Awakening", new { Id = @child.RID })">*@<span>@child.Personal.FirstName @child.Personal.LastName</span>@*</a>*@
+			}
+		<h3>P-Site</h3>
+		<ol>
+			@foreach ( var psite in @Model.PSite )
+			{
+				<li><a href="mailto:@psite.Personal.Email"><span>@psite.Personal.FirstName @psite.Personal.LastName</span></a></li>
+			}
+		</ol>
+		@if ( ViewBag.IsInPSite )
+		{
+			using(Html.BeginForm("LeaveFamily", "Awakening", FormMethod.Post))
+			{
+				@Html.AntiForgeryToken()
+				@Html.Hidden("FamilyID", Model.RID)
+				<input type="submit" class="button large danger" value="Leave Family"/>
+			}
+		}
+
+			Only your Family's Father, Mother, Gopher, and P-Site can view this page.
+	</div>
+}
+else
+{
+	if ( ViewBag.IsInPSite)
+	{
+		<div class="grid">
+			<h1 class="fg-emerald">
+				<a href="@Url.Action("Index")">
+					<i class="icon-arrow-left-3 fg-green smaller"></i>
+				</a>
+				Family
+				<small class="on-right">Sign Up!</small>
+			</h1>
+			@if((ViewBag.Families as ICollection<UTCCatholic.ViewModels.FamilyView>).Count == 0)
+			{
+				<h3>No Families have been created yet. When families are created, you can sign up here!</h3>
+			}
+			@foreach (var f in ViewBag.Families as ICollection<UTCCatholic.ViewModels.FamilyView>)
+			{
+				<h2>@f.Name</h2>
+				<h3>Father</h3>
+				if(f.Father != null)
+				{
+					<a href="mailto:@f.Father.Personal.Email"><span>@f.Father.Name</span></a>
+				}
+				<h3>Mother</h3>
+				if(f.Mother != null)
+				{
+					<a href="mailto:@f.Mother.Personal.Email"><span>@f.Mother.Name</span></a>
+				}
+				<h3>Gopher</h3>
+				if(f.Gopher != null)
+				{
+					<a href="mailto:@f.Gopher.Personal.Email"><span>@f.Gopher.Name</span></a>
+				}
+				<h3>Children</h3>
+				foreach ( var child in f.Children )
+				{
+					<span>@child.Personal.FirstName @child.Personal.LastName</span>
+				}
+				<h3>P-Site</h3>
+				<ol>
+					@foreach ( var psite in f.PSite )
+					{
+						<li><a href="mailto:@psite.Personal.Email"><span>@psite.Personal.FirstName @psite.Personal.LastName</span></a></li>
+					}
+				</ol>
+				using(Html.BeginForm("JoinFamily", "Awakening", FormMethod.Post))
+				{
+					@Html.AntiForgeryToken()
+					@Html.Hidden("FamilyID", f.RID)
+					<input type="submit" class="button large success" value="Join Family"/>
+				}
+				<hr />
+			}
+		</div>
+
+	}
+	else
+	{
+		<div class="grid">
+			<h1 class="fg-emerald">
+				<a href="@Url.Action("Index")">
+					<i class="icon-arrow-left-3 fg-green smaller"></i>
+				</a>
+				Family
+				<small class="on-right">ChattAwakening</small>
+			</h1>
+
+			<h2>Sorry, you are not yet in a family, and are not in P-Site, according to our records. If you believe this to be a mistake, please <a href="mailto:james0308@outlook.com">email our administrators</a></h2>
+		</div>
+	}
+}

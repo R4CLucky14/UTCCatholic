@@ -1,0 +1,225 @@
+﻿@model UTCCatholic.InputModels.UserInput
+@{
+	ViewBag.Title = "ChattAwakening";
+}
+
+<div class="grid">
+	<div class="row">
+		<div class="col-md-8 col-sm-12 hidden-xs">
+			<div class="padding20 quadro">
+				<h1 class="fg-emerald lead">
+					<a href="/">
+						<i class="icon-arrow-left-3 fg-emerald smaller"></i>
+					</a>
+					ChattAwakening
+				</h1>
+				<p class="lead fg-emerald">
+					The first-ever ChattAwakening will be March 28th-30th!
+				</p>
+				@if (Model != null)
+				{
+					if ( Model.Fee != 0M )
+					{
+						<h2>
+							Your Fee is $@Model.Fee
+							<small>You have paid $@Model.FeePaid</small>
+						</h2>
+					}
+				}
+			</div>
+		</div>
+		<div class="col-xs-12 visible-xs">
+			<div class="padding20 quadro">
+				<h1 class="fg-emerald subheader">
+					<a href="/">
+						<i class="icon-arrow-left-3 fg-emerald smaller"></i>
+					</a>
+					ChattAwakening
+				</h1>
+				<p class="lead fg-emerald">
+					The first-ever ChattAwakening will be March 28th-30th!
+				</p>
+			</div>
+		</div>
+		@if(Model != null)
+		{
+			if(Model.Staffer)
+			{
+				<div class="row visible-sm">
+					<div class="col-xs-6">
+						<a class="col-xs-12 bg-emerald" href="/Awakening/Staffers">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Review App</span>
+						</a>
+					</div>
+					<div class="col-xs-6">
+						<a class="col-xs-12 bg-cyan" href="/Awakening/Family">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Your Family</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4 hidden-sm">
+					<div class="row">
+						<a class="col-xs-12 bg-emerald" href="/Awakening/Staffers">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Review Application</span>
+						</a>
+					</div>
+					<div class="row">
+						<a class="col-xs-12 bg-cyan" href="/Awakening/Family">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Your Family</span>
+						</a>
+					</div>
+				</div>
+			}
+			else if ( Model.RetreaterPending || Model.Retreater )
+			{
+				<div class="row visible-sm">
+					<div class="col-xs-6">
+						<a class="col-xs-12 bg-lightGreen disabled" href="/Awakening/Info">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Important Info</span>
+						</a>
+					</div>
+					<div class="col-xs-6">
+						<a class="col-xs-12 bg-green" href="/Awakening/Retreaters">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Review Application</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4 hidden-sm">
+					<div class="row">
+						<a class="col-xs-12 bg-lightGreen disabled" href="/Awakening/RetreaterInformation">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Important Info</span>
+						</a>
+					</div>
+					<div class="row">
+						<a class="col-xs-12 bg-green" href="/Awakening/Retreaters">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Review Application</span>
+						</a>
+					</div>
+				</div>
+			}
+			else
+			{
+				<div class="row visible-sm">
+					<div class="col-xs-6">
+						<a class="col-xs-12 bg-green" href="/Awakening/Retreaters">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Retreaters</span>
+						</a>
+					</div>
+					<div class="col-xs-6">
+						<a class="col-xs-12 bg-emerald" href="/Awakening/Staffers">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Staffers</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4 hidden-sm">
+					<div class="row">
+						<a class="col-xs-12 bg-green" href="/Awakening/Retreaters">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Retreaters</span>
+						</a>
+					</div>
+					<div class="row">
+						<a class="col-xs-12 bg-emerald" href="/Awakening/Staffers">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Staffers</span>
+						</a>
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+				<div class="row visible-sm">
+					<div class="col-xs-6">
+						<a class="col-xs-12 bg-green" href="/Awakening/Retreaters">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Retreaters</span>
+						</a>
+					</div>
+					<div class="col-xs-6">
+						<a class="col-xs-12 bg-emerald" href="/Awakening/Staffers">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Staffers</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4 hidden-sm">
+					<div class="row">
+						<a class="col-xs-12 bg-green" href="/Awakening/Retreaters">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Retreaters</span>
+						</a>
+					</div>
+					<div class="row">
+						<a class="col-xs-12 bg-emerald" href="/Awakening/Staffers">
+							<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Staffers</span>
+						</a>
+					</div>
+				</div>
+		}
+	</div>
+
+
+@*
+	<div class="row">
+		<div class="col-md-8">
+			<div class="padding20 quadro">
+				<h1 class="fg-emerald lead">
+					<a href="@Url.Action("Index", "Home")">
+						<i class="icon-arrow-left-3 fg-emerald smaller"></i>
+					</a>
+					ChattAwakening
+				</h1>
+				<p class="lead fg-emerald">
+					The first-ever ChattAwakening will be March 28th-30th!
+				</p>
+			</div>
+		</div>
+		<div class="col-md-4 hidden-sm">
+			<div class="row">
+				<a class="col-xs-12 bg-green" href="/Awakening/Retreaters">
+					<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Retreaters</span>
+				</a>
+		</div>
+			<div class="row">
+				<a class="col-xs-12 bg-emerald" href="/Awakening/Staffers">
+					<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Staffers</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="row">
+				<a class="col-xs-12 bg-green" href="@Url.Action("Retreaters")">
+					<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Retreaters</span>
+				</a>
+			</div>
+			<div class="row">
+				<a class="col-sm-12 bg-emerald padding20" href="@Url.Action("Staffers")">
+					<span class="subheader text-center fg-white introduce_r">Staffers</span>
+				</a>
+		</div>
+	</div>
+	</div>*@
+	<div class="row">
+		<div class="row">
+			<div class="col-md-8 padding10 bg-lightGreen">
+				<p class="fg-white">
+					Whether you’re a brand-new freshman,
+					or someone who has been here for a few years that wants to invigorate your relationship with God,
+					this should be at the top of your college to-do list.
+				</p>
+			</div>
+			<div class="col-md-4 padding10 bg-white">
+				<p class="fg-black">
+					If you came here to register for Awakening, either as a Retreater or Staffer, please click one of the boxes above.
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<h2 class="subheader">Contact Information</h2>
+		<strong>Megan McGraw</strong><br />
+		<address><a href="mailto:mmcgraw890@gmail.com">mcgraw.m201294@yahoo.com</a></address>
+		<strong>Molly Gallagher</strong><br />
+		<address><a href="mailto:mollygallagher26@gmail.com">mollygallagher26@gmail.com</a></address>
+		<p>
+			Please do not hesitate to contact us with any questions you may have about the retreat.
+		</p>
+	</div>
+</div>

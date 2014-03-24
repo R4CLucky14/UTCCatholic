@@ -1,0 +1,18 @@
+﻿@model UTCCatholic.ViewModels.MedicalView
+
+<div class="grid fluid">
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-control text" data-role="input-control">
+				<label>@Html.LabelFor( m => m.Allergies )</label>
+				<input value="@Model.Allergies" disabled />
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-control text" data-role="input-control">
+				<label>@Html.LabelFor( m => m.HealthConditions )</label>
+				<input value="@Model.HealthConditions" disabled />
+			</div>
+		</div>
+	</div>
+</div>

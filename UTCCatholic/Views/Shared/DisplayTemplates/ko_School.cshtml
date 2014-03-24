@@ -1,0 +1,18 @@
+﻿@model UTCCatholic.ViewModels.SchoolView
+
+<div class="grid fluid">
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-control text" data-role="input-control">
+				<label>@Html.LabelFor( m => m.College )</label>
+				<input data-bind="value:School.College()" disabled />
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-control text" data-role="input-control">
+				<label>@Html.LabelFor( m => m.Grade )</label>
+				<input data-bind="value:School.Grade.Title()" disabled />
+			</div>
+		</div>
+	</div>
+</div>

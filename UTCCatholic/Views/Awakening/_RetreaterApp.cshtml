@@ -1,0 +1,42 @@
+﻿@model UTCCatholic.InputModels.UserInput
+
+@using(Html.BeginForm("RetreatersPost", "Awakening", FormMethod.Post))
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary()
+
+	@Html.LabelFor( c => c.Personal, new { @class= "subheader"})
+	@Html.EditorFor( c => c.Personal, "Personal" )
+
+	<hr />
+	@Html.LabelFor( c => c.School, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.School, "School" )
+
+	<hr />
+	@Html.LabelFor( c => c.Religion, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.Religion, "Religion" )
+
+	<hr />
+	@Html.LabelFor( c => c.Medical, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.Medical, "Medical" )
+
+	<hr />
+	@Html.LabelFor( c => c.Emergency, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.Emergency, "Emergency" )
+
+	<hr />
+	@Html.LabelFor( c => c.Transportation, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.Transportation, "Transportation" )
+	
+	<hr />
+	<fieldset>
+		<span class="pull-right">
+			<a href="@Url.Action("Index", "Awakening")" class="btn">Cancel</a>
+			<button type="submit" class="large success">
+				<span class="glyphicon glyphicon-floppy-disk">
+				</span>
+				Submit Application
+			</button>
+		</span>
+	</fieldset>
+}

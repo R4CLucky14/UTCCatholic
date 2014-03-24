@@ -1,0 +1,69 @@
+﻿@*
+	@model UTCCatholic.ViewModels.UserView
+
+		<h3 class="subheader">@Html.LabelFor( c => c.Personal)</h3>
+		@Html.DisplayFor( c => c.Personal, "Personal" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.School )</h3>
+		@Html.DisplayFor( c => c.School, "School" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.Religion )</h3>
+		@Html.DisplayFor( c => c.Religion, "Religion" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.Medical )</h3>
+		@Html.DisplayFor( c => c.Medical, "Medical" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.Emergency )</h3>
+		@Html.DisplayFor( c => c.Emergency, "Emergency" )
+		<hr />
+
+		<h3 class="subheader">@Html.LabelFor( c => c.Transportation )</h3>
+		@Html.DisplayFor( c => c.Transportation, "Transportation" )
+		<hr />
+*@
+@model UTCCatholic.InputModels.UserInput
+
+@using ( Html.BeginForm( "RetreatersEdit", "Awakening", FormMethod.Post ) )
+{
+	@Html.AntiForgeryToken()
+	<span class="help-inline field-validation-error">
+	</span>
+	@Html.LabelFor( c => c.Personal, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.Personal, "Personal" )
+
+	<hr />
+	@Html.LabelFor( c => c.School, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.School, "School" )
+
+	<hr />
+	@Html.LabelFor( c => c.Religion, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.Religion, "Religion" )
+
+	<hr />
+	@Html.LabelFor( c => c.Medical, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.Medical, "Medical" )
+
+	<hr />
+	@Html.LabelFor( c => c.Emergency, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.Emergency, "Emergency" )
+
+	<hr />
+	@Html.LabelFor( c => c.Transportation, new { @class= "subheader" } )
+	@Html.EditorFor( c => c.Transportation, "Transportation" )
+
+	<hr />
+	<fieldset>
+		<span class="pull-right">
+			<a href="@Url.Action("Index", "Awakening")" class="btn">Cancel</a>
+			<button type="submit" class="large success">
+				<span class="glyphicon glyphicon-floppy-disk">
+				</span>
+				Save Changes
+			</button>
+		</span>
+	</fieldset>
+}

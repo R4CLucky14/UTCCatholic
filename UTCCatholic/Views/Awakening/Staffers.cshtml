@@ -1,0 +1,229 @@
+﻿@model UTCCatholic.InputModels.UserInput
+
+@{
+	ViewBag.Title = "Staffer - ChattAwakening";
+}
+<h1 class="fg-green">
+	<a href="@Url.Action("Index")">
+		<i class="icon-arrow-left-3 fg-emerald smaller"></i>
+	</a>
+	Staffers
+	<small class="on-right">ChattAwakening</small>
+</h1>
+
+@if ( Model.Fee != 0M )
+{
+	<h2>
+		Your Fee is $@Model.Fee
+		<small>You have paid $@Model.FeePaid</small>
+	</h2>
+}
+else
+{
+	<h2 class="subheader">
+		Staffer Fees will be $35.
+	</h2>
+}
+
+<div class="grid fluid">
+	<div class="row">
+		<div class="col-sm-6 bg-emerald padding15 margin5">
+			<p class="fg-white">
+				If you are interested in Staffing Awakening, please fill out the form below.
+				One of our two directors will contact you at a later time to figure out which position you will staff. Thank you!
+			</p>
+		</div>
+		<div class="col-sm-offset-1 col-sm-5 bg-darkGreen padding15 margin5">
+			<p class="fg-white">
+				Anyone can staff Awakening as long as they have attended an Awakening retreat and are a current student at a college or university.
+			</p>
+		</div>
+	</div>
+</div>
+<div class="grid">
+	@{
+		if ( Model.StafferPending )
+		{
+			<div class="row">
+				<div class="col-sm-7">
+					<span class="subheader-secondary">
+						You have already applied to be a staffer. Thank you!
+						<br />
+						You can review your application below.
+					</span>
+				</div>
+				<div class="col-sm-offset-1 col-sm-4">
+					@using ( Html.BeginForm( "StaffersDelete", "Awakening", new { userID = Model.RID } , FormMethod.Post, null ) )
+					{
+						@Html.AntiForgeryToken()
+						<button type="submit" class="col-xs-12 bg-red padding10 text-center">
+							<span class="fg-white subheader-secondary">Delete Application</span>
+						</button>
+					}
+				</div>
+			</div>
+			<div>
+				@{ Html.RenderPartial( "_StafferReviewApplication", Model ); }
+			</div>
+		}
+		else if ( Model.Staffer )
+		{
+			<div class="row">
+				<div class="col-sm-7">
+					<span class="subheader-secondary">
+						You have already applied to be a staffer. Thank you!
+						<br />
+						You can review your application below.
+					</span>
+				</div>
+				<div class="col-sm-offset-1 col-sm-4">
+					@using ( Html.BeginForm( "StaffersDelete", "Awakening", new { userID = Model.RID }, FormMethod.Post, null ) )
+					{
+						@Html.AntiForgeryToken()
+						<button type="submit" class="col-xs-12 bg-red padding10 text-center">
+							<span class="fg-white subheader-secondary">Delete Application</span>
+						</button>
+					}
+				</div>
+			</div>
+			<div>
+				@{ Html.RenderPartial( "_StafferReviewApplication", Model ); }
+			</div>
+		}
+		else if ( Model.Retreater )
+		{
+			<div data-bind="if: Page.User.User.Retreater" class="row">
+				<a href="@Url.Action("Retreaters")" class="col-xs-12 bg-green padding20 text-center">
+					<span class="subheader fg-white introduce_r">You have already applied to be a retreater. <br /> Please go to the Retreater Page. Thank you!</span>
+				</a>
+			</div>
+		}
+		else if ( Model.RetreaterPending )
+		{
+			<div data-bind="if: Page.User.User.Retreater" class="row">
+				<a href="@Url.Action("Retreaters")" class="col-xs-12 bg-green padding20 text-center">
+					<span class="subheader fg-white introduce_r">You have already applied to be a retreater. <br /> Please go to the Retreater Page. Thank you!</span>
+				</a>
+			</div>
+		}
+		else
+		{
+			<div>
+				@if( Model != null)
+				{
+					Html.RenderPartial( "_StafferApp", Model );
+				}
+				else
+				{
+					Html.RenderPartial( "_StafferApp", Model );
+				}
+			</div>
+		}
+	}
+</div>
+
+
+@*
+
+<div data-bind="if: Page.User.loading()">
+	<div data-bind="if: Page.failed()">
+		<span>We could not authenticate you. This is the server message:</span><br />
+		<span data-bind="text: Page.Message()"></span>
+		Please log out, and log back in, and return here. If the problem persists, please <a href="mailto:james0308@outlook.com">contact the administrator.</a>
+	</div>
+	<div data-bind="ifnot: Page.failed()">
+	<img src="@Url.Content("~/Content/Images/ajax-loader.gif")" height=50 width=50 />
+	Please be patient. We are loading the latest information.
+</div>
+</div>
+<div data-bind="visible: !Page.User.loading()">
+	<div data-bind="if: Page.User.User.Retreater()" class="grid">
+		<a class="col-xs-12 bg-emerald" href="@Url.Action("Retreaters")">
+			<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">You have already applied to be a retreater. <br /> Please go to the Retreater Page. Thank you!</span>
+		</a>
+	</div>
+	<div data-bind="if: Page.User.User.RetreaterPending()" class="grid">
+		<div class="row">
+			<a class="col-xs-12 bg-green" href="@Url.Action("Retreaters")">
+				<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">You have already applied to be a retreater. <br /> Please go to the Retreater Page. Thank you!</span>
+			</a>
+		</div>
+	</div>
+	<div data-bind="if: Page.User.User.Staffer()" class="grid">
+		<div class="row">
+			<div class="col-sm-7 padding15">
+				<span class="subheader-secondary">
+					You have already applied to be a staffer. Thank you!
+					<br />
+					You can review your application below.
+				</span>
+			</div>
+			<div class="col-sm-5 padding15 bg-green">
+				<a href="mailto:james0308@outlook.com" class="">
+					<span class="text-center fg-white">
+						If there are any issues/changes with your application, please click here to contact our administrators.
+					</span>
+				</a>
+			</div>
+		</div>
+		<div data-bind="template: { name: 'viewApplication', data: Page.User.User }">
+		</div>
+	</div>
+	<div data-bind="if: Page.User.User.StafferPending()" class="grid">
+		<div class="row">
+			<div class="col-sm-7 padding15">
+				<span class="subheader-secondary">
+					You have already applied to be a staffer. Thank you!
+				<br />
+					You can review your application below.
+				</span>
+			</div>
+			<div class="col-sm-5 bg-green padding15">
+				<a href="mailto:james0308@outlook.com" class="">
+					<span class="text-center fg-white">
+						If there are any issues/changes with your application, please click here to contact our administrators.
+					</span>
+				</a>
+			</div>
+		</div>
+		<div data-bind="template: { name: 'viewApplication', data: Page.User.User }">
+		</div>
+	</div>
+	<div data-bind="visible: Page.User.User.ShowApp()">
+		@{     Html.RenderPartial( "_StafferApp" ); }
+	</div>
+</div>
+
+
+	<script>
+		var Page = new function ()
+		{
+			self = this;
+			self.User = new PersonalUser();
+			self.failed = ko.observable(false);
+			self.Message = ko.observable();
+		}
+		ko.applyBindings(Page);
+		$.connection.hub.start(function ()
+		{
+		}).done(function ()
+		{
+			console.log('Connected to Server!');
+			Page.User.init();
+			Page.failed(false);
+		})
+		.fail(function (e)
+		{
+			console.log('Could not Connect!');
+			Page.Message(e);
+			Page.failed(true);
+		});
+		$(function ()
+		{
+			var form = $("#staffForm");
+			form.removeData('validator');
+			form.removeData('unobtrusiveValidation');
+			$.validator.unobtrusive.parse(form);
+		});
+	</script>
+*@

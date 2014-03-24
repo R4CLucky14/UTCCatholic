@@ -1,0 +1,80 @@
+﻿@model UTCCatholic.InputModels.StaffInput
+
+<fieldset>
+	<div class="grid fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-control textarea" data-role="input-control">
+					<label>@Html.LabelFor( m => m.PreviousAttended )</label>
+					@Html.TextAreaFor( m => m.PreviousAttended, new { placeholder = "I attend the ___Awakening . . ." } )
+					@Html.ValidationMessageFor( m => m.PreviousAttended )
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="input-control textarea" data-role="input-control">
+					<label>@Html.LabelFor( m => m.PreviousPositions )</label>
+					@Html.TextAreaFor( m => m.PreviousPositions, new { placeholder = "At those Awakenings, I had the positions of . . ." } )
+					@Html.ValidationMessageFor( m => m.PreviousPositions )
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-control textarea" data-role="input-control">
+					<label>@Html.LabelFor( m => m.PreviousTalk )</label>
+					@Html.TextAreaFor( m => m.PreviousTalk, new { placeholder = "Talk about any Previous Talks." } )
+					@Html.ValidationMessageFor( m => m.PreviousTalk )
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="input-control textarea" data-role="input-control">
+					<label>@Html.LabelFor( m => m.InterestedTalk )</label>
+					@Html.TextAreaFor( m => m.InterestedTalk, new { placeholder = "I am interested in doing the ___ talk because . . ." } )
+					@Html.ValidationMessageFor( m => m.InterestedTalk )
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<label class="subheader-secondary">Staff Positions Wanted</label>
+			<fieldset>
+				<div class="span4">
+					<div class="input-control select" data-role="input-control">
+						<label>@Html.LabelFor( m => m.FirstChoice )</label>
+						@Html.DropDownListFor( m => m.FirstChoice, ViewBag.Choices as SelectList, "Select Position", null )
+						@Html.ValidationMessageFor( m => m.FirstChoice )
+					</div>
+				</div>
+				<div class="span4">
+					<div class="input-control select" data-role="input-control">
+						<label>@Html.LabelFor( m => m.SecondChoice )</label>
+						@Html.DropDownListFor( m => m.SecondChoice, ViewBag.Choices as SelectList, "Select Position", null )
+						@Html.ValidationMessageFor( m => m.SecondChoice )
+					</div>
+				</div>
+				<div class="span4">
+					<div class="input-control select" data-role="input-control">
+						<label>@Html.LabelFor( m => m.ThirdChoice )</label>
+						@Html.DropDownListFor( m => m.ThirdChoice, ViewBag.Choices as SelectList, "Select Position", null )
+						@Html.ValidationMessageFor( m => m.ThirdChoice )
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-control textarea" data-role="input-control">
+					<label>@Html.LabelFor( m => m.LeadershipPosition )</label>
+					@Html.TextAreaFor( m => m.LeadershipPosition, new { placeholder = "I am interested in the leadership positions of . . ." } )
+					@Html.ValidationMessageFor( m => m.LeadershipPosition )
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="input-control textarea" data-role="input-control">
+					<label>@Html.LabelFor( m => m.AdditionalComments )</label>
+					@Html.TextAreaFor( m => m.AdditionalComments, new { placeholder = "Place any additional comments here." } )
+					@Html.ValidationMessageFor( m => m.AdditionalComments )
+				</div>
+			</div>
+		</div>
+	</div>
+</fieldset>

@@ -1,0 +1,57 @@
+﻿@model UTCCatholic.ViewModels.UserView
+
+<script type="text/html" id="viewApplication">
+	<div class="row">
+		<div class="col-md-6">
+			<h3 class="subheader">@Html.LabelFor( c => c.Personal )</h3>
+		</div>
+		<div class="col-md-6">
+			<button type="button" class="col-xs-12 bg-red" id="SendEmail" data-bind="click: Page.Users.setCurrentUserFalse">
+				<span class="col-xs-12 padding5 subheader text-center fg-white"><i class="icon-cancel on-left"></i>DeSelect</span>
+			</button>
+		</div>
+	</div>
+	@Html.DisplayFor( c => c.Personal, "ko_Personal")
+	<h3 class="subheader">@Html.LabelFor( c => c.School )</h3>
+	@Html.DisplayFor( c => c.School, "ko_School" ))
+	<div class="row">
+		<div class="col-md-6">
+			<h3 class="subheader">@Html.LabelFor( c => c.Staff )</h3>
+		</div>
+		<div class="col-md-6">
+			<button type="button" class="col-xs-12 bg-red" id="SendEmail" data-bind="click: Page.Users.setCurrentUserFalse">
+				<span class="col-xs-12 padding5 subheader text-center fg-white"><i class="icon-cancel on-left"></i>DeSelect</span>
+			</button>
+		</div>
+	</div>
+	@Html.DisplayFor( c => c.Staff, "ko_Staff" )
+	<div class="row">
+		<div class="col-md-6">
+			<h3 class="subheader">@Html.LabelFor( c => c.Religion )</h3>
+		</div>
+		<div class="col-md-6">
+			<button type="button" class="col-xs-12 bg-red" id="SendEmail" data-bind="click: Page.Users.setCurrentUserFalse">
+				<span class="col-xs-12 padding5 subheader text-center fg-white"><i class="icon-cancel on-left"></i>DeSelect</span>
+			</button>
+		</div>
+	</div>
+	@Html.DisplayFor( c => c.Religion, "ko_Religion" )
+	<div class="row">
+		<div class="col-md-6">
+			<h3 class="subheader">@Html.LabelFor( c => c.Medical )</h3>
+		</div>
+		<div class="col-md-6">
+			<button type="button" class="col-xs-12 bg-red" id="SendEmail" data-bind="click: Page.Users.setCurrentUserFalse">
+				<span class="col-xs-12 padding5 subheader text-center fg-white"><i class="icon-cancel on-left"></i>DeSelect</span>
+			</button>
+		</div>
+	</div>
+	@Html.DisplayFor( c => c.Medical, "ko_Medical" )
+	<h3 class="subheader">@Html.LabelFor( c => c.Emergency )</h3>
+	@Html.DisplayFor( c => c.Emergency, "ko_Emergency" )
+	<h3 class="subheader">@Html.LabelFor( c => c.Transportation )</h3>
+	@Html.DisplayFor( c => c.Transportation, "ko_Transportation" )
+	<button type="button" class="col-xs-12 bg-red" id="SendEmail" data-bind="click: Page.Users.setCurrentUserFalse">
+		<span class="col-xs-12 padding5 subheader text-center fg-white"><i class="icon-cancel on-left"></i>DeSelect</span>
+	</button>
+</script>

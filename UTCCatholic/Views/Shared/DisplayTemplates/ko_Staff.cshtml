@@ -1,0 +1,70 @@
+﻿@model UTCCatholic.ViewModels.StaffView
+
+<div class="grid fluid">
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-control textarea" data-role="input-control">
+				<label>@Html.LabelFor( m => m.PreviousAttended )</label>
+				<textarea data-bind="value: Staff.PreviousAttended()" disabled></textarea>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-control textarea" data-role="input-control">
+				<label>@Html.LabelFor( m => m.PreviousPositions )</label>
+				<textarea data-bind="value: Staff.PreviousPositions()" disabled></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-control textarea" data-role="input-control">
+				<label>@Html.LabelFor( m => m.PreviousTalk )</label>
+				<textarea data-bind="value: Staff.PreviousTalk()" disabled></textarea>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-control textarea" data-role="input-control">
+				<label>@Html.LabelFor( m => m.InterestedTalk )</label>
+				<textarea data-bind="value: Staff.InterestedTalk()" disabled></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<label class="subheader-secondary">Staff Positions Wanted</label>
+		<fieldset>
+			<div class="col-sm-4">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.FirstChoice )</label>
+					<input data-bind="value:Staff.FirstChoice.Title()" disabled />
+
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.SecondChoice )</label>
+					<input data-bind="value:Staff.SecondChoice.Title()" disabled />
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.ThirdChoice )</label>
+					<input data-bind="value:Staff.ThirdChoice.Title()" disabled />
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="input-control textarea" data-role="input-control">
+				<label>@Html.LabelFor( m => m.LeadershipPosition )</label>
+				<textarea data-bind="value: Staff.LeadershipPosition()" disabled></textarea>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="input-control textarea" data-role="input-control">
+				<label>@Html.LabelFor( m => m.AdditionalComments )</label>
+				<textarea data-bind="value: Staff.AdditionalComments()" disabled></textarea>
+			</div>
+		</div>
+	</div>
+</div>

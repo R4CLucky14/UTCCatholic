@@ -1,0 +1,34 @@
+﻿@model UTCCatholic.ViewModels.FamilyView
+@{
+	ViewBag.Title = "Add Child - " + @Model.Name + "  - Admin - ChattAwakening";
+}
+
+<h1 class="fg-emerald col-sm-6">
+	<a href="@Url.Action("Index")">
+		<i class="icon-arrow-left-3 fg-green smaller"></i>
+	</a>
+	Add Child
+	<small class="on-right">@Model.Name</small>
+</h1>
+
+
+<h3>Father</h3>
+<a href="mailto:@Model.Father.Personal.Email"><span>@Model.Father.Personal.FirstName @Model.Father.Personal.LastName</span></a>
+<h3>Mother</h3>
+<a href="mailto:@Model.Mother.Personal.Email"><span>@Model.Mother.Personal.FirstName @Model.Mother.Personal.LastName</span></a>
+<h3>Gopher</h3>
+<a href="mailto:@Model.Gopher.Personal.Email"><span>@Model.Gopher.Personal.FirstName @Model.Gopher.Personal.LastName</span></a>
+<h3>Children</h3>
+@foreach ( var child in @Model.Children )
+{
+	<a href="@Url.Action("Profile","Awakening", new { Id = @child.RID })"><span>@child.Personal.FirstName @child.Personal.LastName</span></a>
+}
+
+
+<h3>P-Site</h3>
+<ol>
+	@foreach ( var psite in @Model.PSite )
+	{
+		<li><a href="mailto:@psite.Personal.Email"><span>@psite.Personal.FirstName @psite.Personal.LastName</span></a></li>
+	}
+</ol>

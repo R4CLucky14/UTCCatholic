@@ -1,0 +1,31 @@
+﻿@{
+	ViewBag.Title = "Admin";
+}
+
+<h1 class="fg-green">
+	<a href="@Url.Action("Index", "Home")">
+		<i class="icon-arrow-left-3 fg-emerald smaller"></i>
+	</a>
+	@ViewBag.Title
+	<small class="on-right">UTC Catholic</small>
+</h1>
+
+<div class="row">
+	<a class="col-xs-12 col-sm-4 bg-green text-center" href="@Url.Action("Awakening", "Admin")">
+		<span class="col-xs-12 padding20 subheader  fg-white introduce_r">Awakening<br /></span>
+	</a>
+	<a class="col-xs-12 col-sm-4 bg-cyan" href="@Url.Action("Families", "Admin")">
+		<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Families <br /></span>
+	</a>
+	<a class="col-xs-12 col-sm-4 bg-emerald" href="@Url.Action("Roles", "Admin")">
+		<span class="col-xs-12 padding20 subheader text-center fg-white introduce_r">Roles <br /></span>
+	</a>
+</div>
+<div class="row">
+	<a class="col-xs-12 col-sm-4 bg-amber text-center" href="@Url.Action("RetreaterFees", "Admin")">
+		<span class="col-xs-12 padding20 subheader  fg-white introduce_r">Retreater Fees<br /></span>
+	</a>
+	@*<a class="col-xs-12 col-sm-4 bg-crimson text-center" href="@Url.Action("Fees", "Admin")">
+		<span class="col-xs-12 padding20 subheader  fg-white introduce_r">Export<br /></span>
+	</a>*@
+</div>

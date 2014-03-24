@@ -1,0 +1,57 @@
+﻿@model UTCCatholic.ViewModels.PersonalView
+
+	<div class="grid fluid">
+		<div class="row">
+			<div class="col-xs-6">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.FirstName )</label>
+					<input data-bind="value:Personal.FirstName()" disabled />
+
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="input-control text" data-role="input-control">
+					<label>@Html.LabelFor( m => m.LastName )</label>
+					<input data-bind="value:Personal.LastName()" disabled />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<label class="subheader-secondary">Phone</label>	
+			<fieldset>
+				<div class="col-xs-6">
+					<div class="input-control text" data-role="input-control">
+						<label>@Html.LabelFor( m => m.Phone.Number )</label>
+						<input data-bind="value:Personal.Phone.Number()" disabled />
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="input-control text" data-role="input-control">
+						<label>@Html.LabelFor( m => m.Phone.Carrier )</label>
+						<input data-bind="value:Personal.Phone.Carrier.Title()" disabled />
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div class="row">
+			<div class="input-control text col-xs-12" data-role="input-control">
+				<label>@Html.LabelFor( m => m.Email )</label>
+				<input data-bind="value:Personal.Email()" disabled />
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-control textarea col-xs-12" data-role="input-control">
+				<label>@Html.LabelFor( m => m.Hobbies )</label>
+				<textarea data-bind="value:Personal.Hobbies()" disabled></textarea>
+				<span class="text-success">Siblings? What are your hobbies/activities? Favorite... color.. food.. movie... animal...</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-control text col-xs-12" data-role="input-control">
+				<label>@Html.LabelFor( m => m.TShirtSize )</label>
+				<input data-bind="value:Personal.TShirtSize.Size()" disabled />
+			</div>
+		</div>
+	</div>
+
+

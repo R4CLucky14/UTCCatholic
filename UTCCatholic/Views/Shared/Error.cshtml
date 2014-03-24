@@ -1,0 +1,58 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+	var e = Model.Exception as System.Data.Entity.Validation.DbEntityValidationException;
+}
+
+    <h1 class="text-error">Woops! Something went wrong!</h1>
+    <h2 class="text-error">What happened?</h2>
+	<p class="lead">You came here because the site detected a problem it could not handle. To prevent anything bad from happening, you were brought here!</p>
+	<h2 class="text-error">What's affected?</h2>
+	<p class="lead">All your previous information is unaffected. However, if you were in the middle of send the site data, it may have been lost.</p>
+	<p>We apologize for this inconvenience. If you see this page again, do not hesitate to <a href="mailto:james0308@outlook.com?subject=UTC_Catholic%20Error">email our administrator.</a></p>
+	<h2 class="text-error">What Should I do?</h2>
+	<p class="lead">If you keep coming here, please <a href="mailto:james0308@outlook.com?subject=UTC_Catholic%20Error">email our administrator.</a> Otherwise, please return back to <a href="@Url.Action("Index", "Home")">our home page</a> and continue using our site.</p>
+
+@*
+@if(e != null)
+{
+<p>
+	
+
+	<br />
+	Copy and paste the following message into the Email:
+	<br />
+	<br />
+	The Following Exception Occurred: @Model.Exception <br />
+	In The Action: @Model.ActionName <br />
+	In the Controller: @Model.ControllerName <br />
+	Here is the Stack Trace: @Model.Exception.StackTrace <br />
+	This Error had Validation Errors: <br />
+	@foreach(var eve in e.EntityValidationErrors)
+	{
+		@:Entity of type @eve.Entry.Entity.GetType().Name in state @eve.Entry.State has the following validation errors: <br />
+		foreach(var ve in eve.ValidationErrors)
+		{
+			@:Property: @ve.PropertyName, Error: @ve.ErrorMessage<br />
+		}
+	}
+	<br />
+</p>
+}
+else
+{
+<p>
+	<a href="mailto:james0308@outlook.com?subject=UTC_Catholic%20Error">Click here to contact the Administrator!</a>
+
+	<br />
+	Copy and paste the following message into the Email:
+	<br />
+	<br />
+	The Following Exception Occurred: @Model.Exception <br />
+	In The Action: @Model.ActionName <br />
+	In the Controller: @Model.ControllerName <br />
+	Here is the Stack Trace: @Model.Exception.StackTrace <br />
+</p>
+}
+*@
